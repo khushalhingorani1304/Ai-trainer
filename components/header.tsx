@@ -12,7 +12,7 @@ export function Header() {
     <header className="border-b">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center space-x-2">
-          <span className="text-2xl font-bold">FLEX-IT-OUT</span>
+          <span className="text-2xl font-bold">LLM LEADS</span>
         </Link>
         <nav className="flex items-center space-x-6">
           <Link

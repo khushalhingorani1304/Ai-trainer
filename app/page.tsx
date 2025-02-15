@@ -9,7 +9,7 @@ export default function Home() {
       <div className="text-center space-y-4 mb-12">
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">Transform Your Fitness Journey</h1>
         <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-          Join the community, track your progress, and compete with friends in real-time fitness challenges.
+        Achieve your fitness goals with personalized trainer, challenges, and expert guidance. 
         </p>
         <div className="flex justify-center gap-4">
           <Button size="lg" asChild>
@@ -22,27 +22,27 @@ export default function Home() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl">
-        <Card>
+      <Card>
           <CardHeader>
-            <Trophy className="w-8 h-8 text-primary mb-2" />
-            <CardTitle>Compete & Win</CardTitle>
-            <CardDescription>Join challenges and climb the leaderboard</CardDescription>
+            <Activity className="w-8 h-8 text-primary mb-2" />
+            <CardTitle>Track Progress</CardTitle>
+            <CardDescription>Monitor your exerciese live</CardDescription>
           </CardHeader>
         </Card>
 
         <Card>
           <CardHeader>
             <Users className="w-8 h-8 text-primary mb-2" />
-            <CardTitle>Community</CardTitle>
-            <CardDescription>Connect with fitness enthusiasts</CardDescription>
+            <CardTitle>Leaderboard</CardTitle>
+            <CardDescription>Climb the leaderboard to the top</CardDescription>
           </CardHeader>
         </Card>
 
         <Card>
           <CardHeader>
-            <Activity className="w-8 h-8 text-primary mb-2" />
-            <CardTitle>Track Progress</CardTitle>
-            <CardDescription>Monitor your fitness journey</CardDescription>
+            <Trophy className="w-8 h-8 text-primary mb-2" />
+            <CardTitle>Compete & Win</CardTitle>
+            <CardDescription>Join challenges and climb the leaderboard</CardDescription>
           </CardHeader>
         </Card>
 
