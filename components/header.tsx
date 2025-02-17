@@ -19,13 +19,13 @@ export function Header() {
 
     checkAuth(); // Initial check
 
-    // Listen for storage changes
+    // Listen for storage changes across tabs
     window.addEventListener("storage", checkAuth);
 
     return () => {
       window.removeEventListener("storage", checkAuth);
     };
-  }, [isAuthenticated]);
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -42,28 +42,38 @@ export function Header() {
         <nav className="flex items-center space-x-6">
           <Link
             href="/dashboard"
-            className={`text-sm font-medium transition-colors hover:text-primary ${pathname === "/dashboard" ? "text-primary" : "text-muted-foreground"}`}
+            className={`text-sm font-medium transition-colors hover:text-primary ${
+              pathname === "/dashboard" ? "text-primary" : "text-muted-foreground"
+            }`}
           >
             Dashboard
           </Link>
           <Link
             href="/challenges"
-            className={`text-sm font-medium transition-colors hover:text-primary ${pathname === "/challenges" ? "text-primary" : "text-muted-foreground"}`}
+            className={`text-sm font-medium transition-colors hover:text-primary ${
+              pathname === "/challenges" ? "text-primary" : "text-muted-foreground"
+            }`}
           >
             Challenges
           </Link>
           <Link
             href="/leaderboard"
-            className={`text-sm font-medium transition-colors hover:text-primary ${pathname === "/leaderboard" ? "text-primary" : "text-muted-foreground"}`}
+            className={`text-sm font-medium transition-colors hover:text-primary ${
+              pathname === "/leaderboard" ? "text-primary" : "text-muted-foreground"
+            }`}
           >
             Leaderboard
           </Link>
-          <Link
-            href="/profile"
-            className={`text-sm font-medium transition-colors hover:text-primary ${pathname === "/profile" ? "text-primary" : "text-muted-foreground"}`}
-          >
-            Profile
-          </Link>
+          {isAuthenticated && (
+            <Link
+              href="/profile"
+              className={`text-sm font-medium transition-colors hover:text-primary ${
+                pathname === "/profile" ? "text-primary" : "text-muted-foreground"
+              }`}
+            >
+              Profile
+            </Link>
+          )}
           <ModeToggle />
           {isAuthenticated ? (
             <Button variant="default" size="sm" onClick={handleLogout}>
@@ -71,7 +81,14 @@ export function Header() {
             </Button>
           ) : (
             <Link href="/login">
-              <Button variant="default" size="sm">
+              <Button
+                variant="default"
+                size="sm"
+                onClick={() => {
+                  localStorage.setItem("token", "dummy_token"); // Simulating login
+                  setIsAuthenticated(true);
+                }}
+              >
                 Sign In
               </Button>
             </Link>
