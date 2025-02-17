@@ -1,30 +1,92 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Textarea } from "@/components/ui/textarea"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { ProfileStats } from "@/components/profile/profile-stats"
-import { ActivityHistory } from "@/components/profile/activity-history"
-import { Achievements } from "@/components/profile/achievements"
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Textarea } from "@/components/ui/textarea";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ProfileStats } from "@/components/profile/profile-stats";
+import { ActivityHistory } from "@/components/profile/activity-history";
+import { Achievements } from "@/components/profile/achievements";
 
 export default function ProfilePage() {
   const [profile, setProfile] = useState({
-    name: "John Doe",
-    email: "john@example.com",
-    bio: "Fitness enthusiast | Love challenging myself",
+    name: "",
+    email: "",
+    bio: "",
     avatar: "/placeholder.svg",
-  })
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          console.error("User not authenticated");
+          return;
+        }
+
+        const response = await fetch("http://localhost:4000/api/users/profile", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch profile");
+        }
+
+        const data = await response.json();
+        setProfile({
+          name: data.name || "",
+          email: data.email || "",
+          bio: data.bio || "",
+          avatar: data.avatar || "/placeholder.svg",
+        });
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProfile();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    // TODO: Implement profile update
-    console.log("Profile updated:", profile)
-  }
+    e.preventDefault();
+
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        console.error("User not authenticated");
+        return;
+      }
+
+      const response = await fetch("http://localhost:4000/api/users/profile", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(profile),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update profile");
+      }
+
+      console.log("Profile updated successfully");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <div className="space-y-6">
@@ -107,6 +169,5 @@ export default function ProfilePage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-

@@ -2,22 +2,39 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
+import { useRouter } from "next/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
+import axios from "axios";
 
 export default function LoginPage() {
+  const router = useRouter()
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   })
+  const [message, setMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    // TODO: Implement login logic
-    console.log("Form submitted:", formData)
-  }
+    e.preventDefault();
+    console.log("Form submitted:", formData);
+  
+    try {
+      const res = await axios.post("http://localhost:4000/api/users/login", {
+        email: formData.email, // Correctly pass email
+        password: formData.password, // Correctly pass password
+      });
+  
+      localStorage.setItem("token", res.data.token);
+      setMessage("Login successful!");
+      router.push("/") // Redirect to login page
+    } catch (error: any) {
+      setMessage(error.response?.data?.message || "Login failed");
+    }
+  };
+  
 
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-4rem)]">

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -8,16 +9,33 @@ import { Label } from "@/components/ui/label"
 import Link from "next/link"
 
 export default function SignUpPage() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  })
+  const router = useRouter()
+  const [formData, setFormData] = useState({ name: "", email: "", password: "" })
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // TODO: Implement signup logic
-    console.log("Form submitted:", formData)
+    setLoading(true)
+    setError("")
+
+    try {
+      const res = await fetch("http://localhost:4000/api/users/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || "Signup failed")
+
+      alert("Account created successfully! Please log in.")
+      router.push("/login") // Redirect to login page
+    } catch (err: any) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -60,8 +78,9 @@ export default function SignUpPage() {
                 required
               />
             </div>
-            <Button type="submit" className="w-full">
-              Sign Up
+            {error && <p className="text-red-500 text-sm">{error}</p>}
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? "Signing Up..." : "Sign Up"}
             </Button>
           </form>
           <div className="mt-4 text-center text-sm">
@@ -75,4 +94,3 @@ export default function SignUpPage() {
     </div>
   )
 }
-
