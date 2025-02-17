@@ -61,19 +61,15 @@ The frontend is built with **Next.js** and displays the fitness tracker UI.
 
 #### **Steps:**
 1. Open another terminal.
-2. Navigate to the main directory:
-   ```sh
-   cd frontend
-   ```
-3. Install dependencies (only needed the first time):
+2. Install dependencies (only needed the first time):
    ```sh
    npm install
    ```
-4. Start the frontend:
+3. Start the frontend:
    ```sh
    npm run dev
    ```
-5. The app will be available at **`http://localhost:3000`**.
+4. The app will be available at **`http://localhost:3000`**.
 
 ---
 
