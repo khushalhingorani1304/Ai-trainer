@@ -16,7 +16,7 @@ export function ProfileStats() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/stats", {
+        const response = await fetch("http://localhost:4000/api/users/stats", {
           method: "GET",
           credentials: "include", // If using cookies for auth
           headers: {
@@ -27,6 +27,8 @@ export function ProfileStats() {
         if (!response.ok) throw new Error("Failed to fetch stats")
 
         const data = await response.json()
+        console.log(data);
+        
         setStats(data)
       } catch (error) {
         console.error("Error fetching stats:", error)

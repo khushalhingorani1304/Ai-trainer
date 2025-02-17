@@ -14,7 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="min-h-screen bg-background">
             <Header />
-            <main className="container mx-auto py-4">{children}</main>
+            <main className="container mx-auto py-4 px-16">{children}</main>
           </div>
           <Toaster />
         </ThemeProvider>
