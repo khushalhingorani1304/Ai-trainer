@@ -118,7 +118,7 @@ The frontend is built with **Next.js** and displays the fitness tracker UI.
 ---
 
 ## 🎉 **Contributing**
-Feel free to fork this repo and submit a pull request. Contributions are welcome!
+Feel free to fork this repo and submit a pull request. Contributions are welcome!!
 
 ---
 
