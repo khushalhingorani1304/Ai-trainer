@@ -193,7 +193,7 @@ def webcam_interface():
         
         cv2.imshow('Fitness Tracker', frame)
         
-        # Handle key presses
+        # Handle key presses helklo hjcsa how are you
         key = cv2.waitKey(1) & 0xFF
         if key == ord('q'):
             break
