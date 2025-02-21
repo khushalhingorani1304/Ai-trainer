@@ -13,10 +13,10 @@ const app = express()
 // Middleware
 app.use(
     cors({
-        origin: "http://localhost:3000", // Allow frontend origin
-        credentials: true, // Enable credentials (cookies, authentication headers)
-        methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
-        allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+        origin: "http://localhost:3000", 
+        credentials: true, 
+        methods: ["GET", "POST", "PUT", "DELETE"], 
+        allowedHeaders: ["Content-Type", "Authorization"], 
     })
 );
 app.use(cors())

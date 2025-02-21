@@ -21,10 +21,10 @@ const userSchema = new mongoose.Schema(
       required: true,
       minlength: 7,
     },
-    avatar: {
-      type: String,
-      default: "default-avatar.png",
-    },
+    // avatar: {
+    //   type: String,
+    //   default: "default-avatar.png",
+    // },
     level: {
       type: Number,
       default: 1,

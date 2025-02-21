@@ -17,11 +17,7 @@ const challengeSchema = new mongoose.Schema(
       enum: [
         "pushup",
         "squat",
-        "crunch",
-        "jumping_jack",
-        "plank",
-        "burpee",
-        "mixed",
+        "bicepcurl"
       ],
     },
     difficulty: {

@@ -10,7 +10,7 @@ const activitySchema = new mongoose.Schema(
     type: {
       type: String,
       required: true,
-      enum: ["pushup", "squat", "crunch", "jumping_jack", "plank", "burpee"],
+      enum: ["pushup", "squat", "bicepscurl"],
     },
     count: {
       type: Number,
